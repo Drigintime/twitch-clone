@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamHub - Twitch Clone</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-play-circle"></i> StreamHub
+            </div>
+            <div class="nav-search">
+                <input type="text" placeholder="Search streams, games, creators...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="nav-menu">
+                <a href="#" class="nav-link">Browse</a>
+                <a href="#" class="nav-link">Categories</a>
+                <button class="btn-login" id="loginBtn">Login</button>
+                <button class="btn-signup" id="signupBtn">Sign Up</button>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h3>Following</h3>
+            <button class="btn-collapse"><i class="fas fa-chevron-up"></i></button>
+        </div>
+        <ul class="sidebar-streams">
+            <li class="stream-item">
+                <img src="https://via.placeholder.com/32" alt="avatar">
+                <span>Streamer Name</span>
+                <span class="live-badge">LIVE</span>
+            </li>
+        </ul>
+        <hr>
+        <div class="sidebar-header">
+            <h3>Recommended</h3>
+        </div>
+        <ul class="sidebar-categories">
+            <li><a href="#">Just Chatting</a></li>
+            <li><a href="#">League of Legends</a></li>
+            <li><a href="#">Fortnite</a></li>
+            <li><a href="#">Minecraft</a></li>
+            <li><a href="#">Valorant</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Featured Stream -->
+        <section class="featured-stream">
+            <div class="video-player">
+                <video id="mainPlayer" controls>
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-library/sample/big_buck_bunny.mp4" type="video/mp4">
+                </video>
+                <div class="player-overlay">
+                    <button class="play-btn"><i class="fas fa-play"></i></button>
+                </div>
+            </div>
+            <div class="stream-info">
+                <div class="streamer-header">
+                    <img src="https://via.placeholder.com/50" alt="streamer" class="streamer-avatar">
+                    <div class="streamer-details">
+                        <h2 id="streamerName">Example Streamer</h2>
+                        <p id="streamTitle">Playing Some Cool Games</p>
+                        <p class="stream-category">Category: Just Chatting</p>
+                    </div>
+                    <button class="btn-follow">Follow</button>
+                </div>
+                <p class="stream-description">
+                    Welcome to the stream! We're having a great time hanging out and chatting with the community.
+                </p>
+            </div>
+        </section>
+
+        <!-- Stream Container with Chat -->
+        <div class="stream-container">
+            <!-- Chat Section -->
+            <section class="chat-section">
+                <div class="chat-header">
+                    <h3>Chat</h3>
+                    <button class="chat-settings"><i class="fas fa-cog"></i></button>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-message">
+                        <span class="username">Moderator</span>
+                        <span class="message">Welcome to the stream!</span>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="Send a message...">
+                    <button id="sendChat"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Recommended Streams Section -->
+        <section class="recommended-section">
+            <h2>Recommended For You</h2>
+            <div class="streams-grid" id="streamsGrid">
+                <!-- Stream cards will be generated here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login to StreamHub</h2>
+            <form id="loginForm">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="#" onclick="switchToSignup()">Sign Up</a></p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create Your StreamHub Account</h2>
+            <form id="signupForm">
+                <input type="text" placeholder="Username" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <input type="password" placeholder="Confirm Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="#" onclick="switchToLogin()">Login</a></p>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/streams.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StreamHub - Twitch Clone</title>
+    <title>Twatch - Stream Platform</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
@@ -12,7 +12,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <i class="fas fa-play-circle"></i> StreamHub
+                <span class="logo-t">T</span>watch
             </div>
             <div class="nav-search">
                 <input type="text" placeholder="Search streams, games, creators...">
@@ -32,95 +32,85 @@
         </div>
     </nav>
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <h3>Following</h3>
-            <button class="btn-collapse"><i class="fas fa-chevron-up"></i></button>
-        </div>
-        <ul class="sidebar-streams">
-            <li class="stream-item">
-                <img src="https://via.placeholder.com/32" alt="avatar">
-                <span>Streamer Name</span>
-                <span class="live-badge">LIVE</span>
-            </li>
-        </ul>
-        <hr>
-        <div class="sidebar-header">
-            <h3>Recommended</h3>
-        </div>
-        <ul class="sidebar-categories">
-            <li><a href="#">Just Chatting</a></li>
-            <li><a href="#">League of Legends</a></li>
-            <li><a href="#">Fortnite</a></li>
-            <li><a href="#">Minecraft</a></li>
-            <li><a href="#">Valorant</a></li>
-        </ul>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Featured Stream -->
-        <section class="featured-stream">
-            <div class="video-player">
-                <video id="mainPlayer" controls>
-                    <source src="https://commondatastorage.googleapis.com/gtv-videos-library/sample/big_buck_bunny.mp4" type="video/mp4">
-                </video>
-                <div class="player-overlay">
-                    <button class="play-btn"><i class="fas fa-play"></i></button>
-                </div>
+    <!-- Main Layout -->
+    <div class="main-layout">
+        <!-- Streamer Sidebar -->
+        <aside class="streamer-sidebar">
+            <div class="streamer-header">
+                <h3>Featured Streamers</h3>
             </div>
-            <div class="stream-info">
-                <div class="streamer-header">
-                    <img src="https://via.placeholder.com/50" alt="streamer" class="streamer-avatar">
-                    <div class="streamer-details">
-                        <h2 id="streamerName">Example Streamer</h2>
-                        <p id="streamTitle">Playing Some Cool Games</p>
-                        <p class="stream-category">Category: Just Chatting</p>
-                    </div>
-                    <button class="btn-follow">Follow</button>
-                </div>
-                <p class="stream-description">
-                    Welcome to the stream! We're having a great time hanging out and chatting with the community.
-                </p>
-            </div>
-        </section>
+            <ul class="streamer-list" id="streamerList">
+                <!-- Streamers will be generated here -->
+            </ul>
+        </aside>
 
-        <!-- Stream Container with Chat -->
-        <div class="stream-container">
-            <!-- Chat Section -->
-            <section class="chat-section">
-                <div class="chat-header">
-                    <h3>Chat</h3>
-                    <button class="chat-settings"><i class="fas fa-cog"></i></button>
-                </div>
-                <div class="chat-messages" id="chatMessages">
-                    <div class="chat-message">
-                        <span class="username">Moderator</span>
-                        <span class="message">Welcome to the stream!</span>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Featured Stream Section -->
+            <section class="featured-stream">
+                <div class="stream-wrapper">
+                    <!-- Video Player -->
+                    <div class="video-player" id="videoPlayer">
+                        <video id="mainPlayer" controls>
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-library/sample/big_buck_bunny.mp4" type="video/mp4">
+                        </video>
+                        
+                        <!-- Chat Overlay -->
+                        <div class="chat-overlay" id="chatOverlay">
+                            <div class="overlay-chat-messages" id="overlayChatMessages">
+                                <!-- Chat messages appear here -->
+                            </div>
+                        </div>
+
+                        <!-- Stream Info Overlay -->
+                        <div class="stream-info-overlay">
+                            <div class="game-info">
+                                <span class="game-name" id="overlayGameName">Game Name</span>
+                                <span class="game-progress" id="overlayGameProgress">0%</span>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Chat Section -->
+                    <section class="chat-section">
+                        <div class="chat-header">
+                            <h3>Chat</h3>
+                            <button class="chat-settings"><i class="fas fa-cog"></i></button>
+                        </div>
+                        <div class="chat-messages" id="chatMessages">
+                            <!-- Messages loaded here -->
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" id="chatInput" placeholder="Send a message...">
+                            <button id="sendChat"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </section>
                 </div>
-                <div class="chat-input">
-                    <input type="text" id="chatInput" placeholder="Send a message...">
-                    <button id="sendChat"><i class="fas fa-paper-plane"></i></button>
+
+                <!-- Stream Info Below Video -->
+                <div class="stream-details">
+                    <div class="streamer-info">
+                        <img src="https://via.placeholder.com/50" alt="streamer" class="streamer-avatar">
+                        <div class="streamer-details">
+                            <h2 id="streamerName">Streamer Name</h2>
+                            <p id="streamTitle">Playing Game</p>
+                            <p class="stream-game-info" id="streamGameInfo">Game: Unknown</p>
+                        </div>
+                        <button class="btn-follow">Follow</button>
+                    </div>
+                    <p class="stream-description" id="streamDescription">
+                        Welcome to the stream!
+                    </p>
                 </div>
             </section>
-        </div>
-
-        <!-- Recommended Streams Section -->
-        <section class="recommended-section">
-            <h2>Recommended For You</h2>
-            <div class="streams-grid" id="streamsGrid">
-                <!-- Stream cards will be generated here -->
-            </div>
-        </section>
-    </main>
+        </main>
+    </div>
 
     <!-- Login Modal -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Login to StreamHub</h2>
+            <h2>Login to Twatch</h2>
             <form id="loginForm">
                 <input type="email" placeholder="Email" required>
                 <input type="password" placeholder="Password" required>
@@ -134,7 +124,7 @@
     <div class="modal" id="signupModal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Create Your StreamHub Account</h2>
+            <h2>Create Your Twatch Account</h2>
             <form id="signupForm">
                 <input type="text" placeholder="Username" required>
                 <input type="email" placeholder="Email" required>

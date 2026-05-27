@@ -1,18 +1,11 @@
 // DOM Elements
 const hamburger = document.getElementById('hamburger');
-const sidebar = document.querySelector('.sidebar');
-const navMenu = document.querySelector('.nav-menu');
+const streamerList = document.getElementById('streamerList');
 const loginBtn = document.getElementById('loginBtn');
 const signupBtn = document.getElementById('signupBtn');
 const loginModal = document.getElementById('loginModal');
 const signupModal = document.getElementById('signupModal');
 const closeButtons = document.querySelectorAll('.close');
-
-// Mobile Menu Toggle
-hamburger.addEventListener('click', () => {
-    sidebar.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
 
 // Modal Controls
 loginBtn.addEventListener('click', () => {
@@ -44,101 +37,152 @@ function switchToLogin() {
     loginModal.style.display = 'block';
 }
 
-// Sample Stream Data
-const sampleStreams = [
+// Streamer Data
+const streamers = [
     {
         id: 1,
-        thumbnail: 'https://via.placeholder.com/300x168?text=Stream+1',
-        title: 'Chill Gaming Session',
-        streamer: 'GamerPro',
-        avatar: 'https://via.placeholder.com/32',
-        viewers: 1250,
-        live: true
+        name: 'v0rtrox',
+        game: 'Geometry Dash',
+        title: 'Cycles x 93%',
+        progress: '93%',
+        avatar: 'https://via.placeholder.com/40?text=v0rtrox',
+        description: 'Attempting Cycles x! This extreme demon is intense!',
+        videoUrl: '' // You'll add this
     },
     {
         id: 2,
-        thumbnail: 'https://via.placeholder.com/300x168?text=Stream+2',
-        title: 'Just Chatting',
-        streamer: 'ContentCreator',
-        avatar: 'https://via.placeholder.com/32',
-        viewers: 3420,
-        live: true
+        name: 'Kingsammelot',
+        game: 'Geometry Dash',
+        title: '40-100 Challenge',
+        progress: '67%',
+        avatar: 'https://via.placeholder.com/40?text=Kings',
+        description: 'Extreme jumps! Let\'s see if we can hit this!',
+        videoUrl: '' // You'll add this
     },
     {
         id: 3,
-        thumbnail: 'https://via.placeholder.com/300x168?text=Stream+3',
-        title: 'Music Production Live',
-        streamer: 'MusicProducer',
-        avatar: 'https://via.placeholder.com/32',
-        viewers: 850,
-        live: true
+        name: 'Robtop',
+        game: 'Just Chatting',
+        title: 'Development Update',
+        progress: '-',
+        avatar: 'https://via.placeholder.com/40?text=Robtop',
+        description: 'Talking about the latest updates to Geometry Dash and the community!',
+        videoUrl: '' // You'll add this
     },
     {
         id: 4,
-        thumbnail: 'https://via.placeholder.com/300x168?text=Stream+4',
-        title: 'Coding Challenge',
-        streamer: 'CodeMaster',
-        avatar: 'https://via.placeholder.com/32',
-        viewers: 2100,
-        live: true
+        name: 'ProGamer',
+        game: 'Minecraft',
+        title: 'Speedrun Practice',
+        progress: '45:32',
+        avatar: 'https://via.placeholder.com/40?text=ProGamer',
+        description: 'Training for the next speedrun competition!',
+        videoUrl: '' // You'll add this
     },
     {
         id: 5,
-        thumbnail: 'https://via.placeholder.com/300x168?text=Stream+5',
-        title: 'Speedrun Attempt',
-        streamer: 'SpeedRunner',
-        avatar: 'https://via.placeholder.com/32',
-        viewers: 5600,
-        live: true
+        name: 'ValorantPro',
+        game: 'Valorant',
+        title: 'Ranked Climbing',
+        progress: 'Radiant Push',
+        avatar: 'https://via.placeholder.com/40?text=VPro',
+        description: 'Grinding to top of leaderboard. 5-stack ready!',
+        videoUrl: '' // You'll add this
     },
     {
         id: 6,
-        thumbnail: 'https://via.placeholder.com/300x168?text=Stream+6',
-        title: 'Game Development',
-        streamer: 'IndieCreator',
-        avatar: 'https://via.placeholder.com/32',
-        viewers: 1890,
-        live: true
+        name: 'CreativeStreamer',
+        game: 'Just Chatting',
+        title: 'Chill Stream',
+        progress: '-',
+        avatar: 'https://via.placeholder.com/40?text=Creative',
+        description: 'Vibing with the chat and answering questions!',
+        videoUrl: '' // You'll add this
+    },
+    {
+        id: 7,
+        name: 'FortniteKing',
+        game: 'Fortnite',
+        title: 'Arena Tournament',
+        progress: 'Finals',
+        avatar: 'https://via.placeholder.com/40?text=FortniteK',
+        description: 'Competing in the weekly arena tournament!',
+        videoUrl: '' // You'll add this
+    },
+    {
+        id: 8,
+        name: 'CodeMaster',
+        game: 'Just Chatting',
+        title: 'Dev Talk',
+        progress: '-',
+        avatar: 'https://via.placeholder.com/40?text=Code',
+        description: 'Discussing web development and new frameworks!',
+        videoUrl: '' // You'll add this
     }
 ];
 
-// Render Stream Cards
-function renderStreams() {
-    const streamsGrid = document.getElementById('streamsGrid');
-    streamsGrid.innerHTML = '';
+let currentStreamer = streamers[0];
 
-    sampleStreams.forEach(stream => {
-        const streamCard = document.createElement('div');
-        streamCard.className = 'stream-card';
-        streamCard.innerHTML = `
-            <div class="stream-card-thumbnail">
-                <img src="${stream.thumbnail}" alt="${stream.title}">
-                <div class="live-indicator">LIVE</div>
-                <div class="viewer-count">👁️ ${stream.viewers.toLocaleString()}</div>
+// Render Streamer List
+function renderStreamerList() {
+    streamerList.innerHTML = '';
+    streamers.forEach(streamer => {
+        const streamerItem = document.createElement('li');
+        streamerItem.className = 'streamer-item' + (streamer.id === currentStreamer.id ? ' active' : '');
+        streamerItem.innerHTML = `
+            <img src="${streamer.avatar}" alt="${streamer.name}" class="streamer-avatar">
+            <div class="streamer-info">
+                <span class="streamer-name">${streamer.name}</span>
+                <span class="streamer-game">${streamer.game}</span>
             </div>
-            <div class="stream-card-info">
-                <div class="stream-card-header">
-                    <img src="${stream.avatar}" alt="${stream.streamer}" class="stream-card-avatar">
-                    <div class="stream-card-details">
-                        <h3>${stream.title}</h3>
-                        <p>${stream.streamer}</p>
-                    </div>
-                </div>
-            </div>
+            <span class="live-badge">LIVE</span>
         `;
-
-        streamCard.addEventListener('click', () => {
-            console.log(`Clicked stream: ${stream.title}`);
-            // Update featured stream
-            document.getElementById('streamerName').textContent = stream.streamer;
-            document.getElementById('streamTitle').textContent = stream.title;
+        
+        streamerItem.addEventListener('click', () => {
+            loadStreamer(streamer);
         });
-
-        streamsGrid.appendChild(streamCard);
+        
+        streamerList.appendChild(streamerItem);
     });
+}
+
+// Load Streamer
+function loadStreamer(streamer) {
+    currentStreamer = streamer;
+    
+    // Update UI
+    document.getElementById('streamerName').textContent = streamer.name;
+    document.getElementById('streamTitle').textContent = streamer.title;
+    document.getElementById('streamGameInfo').textContent = `Game: ${streamer.game}`;
+    document.getElementById('streamDescription').textContent = streamer.description;
+    document.getElementById('overlayGameName').textContent = streamer.game;
+    document.getElementById('overlayGameProgress').textContent = streamer.progress;
+    
+    // Update video source
+    if (streamer.videoUrl) {
+        document.getElementById('mainPlayer').src = streamer.videoUrl;
+    }
+    
+    // Update active streamer in sidebar
+    document.querySelectorAll('.streamer-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    event.target.closest('.streamer-item').classList.add('active');
+    
+    // Clear chat and reload
+    document.getElementById('chatMessages').innerHTML = '';
+    document.getElementById('overlayChatMessages').innerHTML = '';
+    loadChatForStreamer(streamer.id);
+}
+
+// Load chat for streamer
+function loadChatForStreamer(streamerId) {
+    // This will be populated by chat.js
+    generateCrazyChat(streamerId);
 }
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    renderStreams();
+    renderStreamerList();
+    loadStreamer(currentStreamer);
 });
